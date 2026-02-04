@@ -106,6 +106,11 @@ $riwayat = $stmt->fetchAll();
                                         <span class="badge <?= $badgeClass ?>">
                                             <?= ucfirst($r['status']) ?>
                                         </span>
+                                        <?php if ($r['status'] === 'ditolak' && !empty($r['alasan_tolak'])): ?>
+                                            <br><small style="color: var(--accent-red); display: block; margin-top: 5px;">
+                                                <i class="fas fa-info-circle"></i> <?= htmlspecialchars($r['alasan_tolak']) ?>
+                                            </small>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
                                         <?php if ($r['status'] === 'disetujui' || $r['status'] === 'selesai'): ?>

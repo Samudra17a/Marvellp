@@ -1728,3 +1728,234 @@ select.form-control {
         font-size: 1.5rem;
     }
 }
+
+/* =============================================
+   SWEETALERT2 THEME OVERRIDES
+   ============================================= */
+.swal2-popup.marvell-popup {
+    background: #1a1a1a !important;
+    border: 1px solid rgba(255, 215, 0, 0.3) !important;
+    border-radius: 20px !important;
+    font-family: var(--font-main) !important;
+}
+
+.swal2-title.marvell-title {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+.swal2-html-container {
+    color: #B0B0B0 !important;
+}
+
+.swal2-confirm.marvell-confirm-btn {
+    background: linear-gradient(135deg, #C9A100 0%, #FFD700 50%, #D4AF37 100%) !important;
+    color: #0a0a0a !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+    padding: 12px 30px !important;
+    border: none !important;
+}
+
+.swal2-confirm.marvell-confirm-btn:hover {
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3) !important;
+}
+
+.swal2-cancel.marvell-cancel-btn {
+    background: #333 !important;
+    color: #ffffff !important;
+    border-radius: 50px !important;
+    font-weight: 500 !important;
+    padding: 12px 30px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.swal2-deny.marvell-deny-btn {
+    background: #FF5252 !important;
+    color: #ffffff !important;
+    border-radius: 50px !important;
+    font-weight: 500 !important;
+    padding: 12px 30px !important;
+}
+
+.swal2-icon.swal2-success {
+    border-color: #00C853 !important;
+    color: #00C853 !important;
+}
+
+.swal2-icon.swal2-success .swal2-success-ring {
+    border-color: rgba(0, 200, 83, 0.3) !important;
+}
+
+.swal2-icon.swal2-success .swal2-success-line-tip,
+.swal2-icon.swal2-success .swal2-success-line-long {
+    background-color: #00C853 !important;
+}
+
+.swal2-icon.swal2-error {
+    border-color: #FF5252 !important;
+}
+
+.swal2-icon.swal2-error .swal2-x-mark-line-left,
+.swal2-icon.swal2-error .swal2-x-mark-line-right {
+    background-color: #FF5252 !important;
+}
+
+.swal2-icon.swal2-warning {
+    border-color: #FF9800 !important;
+    color: #FF9800 !important;
+}
+
+.swal2-icon.swal2-info {
+    border-color: #FFD700 !important;
+    color: #FFD700 !important;
+}
+
+.swal2-icon.swal2-question {
+    border-color: #FFD700 !important;
+    color: #FFD700 !important;
+}
+
+/* Timer progress bar */
+.swal2-timer-progress-bar {
+    background: linear-gradient(90deg, #C9A100, #FFD700) !important;
+}
+
+/* =============================================
+   ENHANCED PRINT STYLES
+   ============================================= */
+@media print {
+
+    /* Hide non-printable elements */
+    .sidebar,
+    .dashboard-header,
+    .no-print,
+    .mobile-menu-btn,
+    .btn,
+    .card.mb-3,
+    .stats-grid,
+    .chart-container {
+        display: none !important;
+    }
+
+    /* Reset page layout */
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 12pt !important;
+        line-height: 1.4 !important;
+    }
+
+    .dashboard {
+        display: block !important;
+    }
+
+    .main-content {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Print header styling */
+    .print-header {
+        display: block !important;
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 3px solid #C9A100;
+    }
+
+    .print-header h1 {
+        color: #C9A100 !important;
+        font-size: 24pt !important;
+        margin-bottom: 5px !important;
+    }
+
+    .print-header .company-name {
+        font-size: 28pt !important;
+        font-weight: 800 !important;
+        color: #000000 !important;
+        margin-bottom: 10px !important;
+    }
+
+    .print-header .print-date {
+        font-size: 10pt !important;
+        color: #666666 !important;
+    }
+
+    /* Table styling for print */
+    .table-container {
+        box-shadow: none !important;
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+
+    .table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        font-size: 10pt !important;
+    }
+
+    .table th {
+        background: #f5f5f5 !important;
+        color: #000000 !important;
+        border: 1px solid #ddd !important;
+        padding: 10px 8px !important;
+        font-weight: 600 !important;
+    }
+
+    .table td {
+        border: 1px solid #ddd !important;
+        padding: 8px !important;
+        color: #000000 !important;
+        background: #ffffff !important;
+    }
+
+    .table tbody tr:nth-child(even) td {
+        background: #f9f9f9 !important;
+    }
+
+    .table tfoot td {
+        background: #f5f5f5 !important;
+        font-weight: 600 !important;
+    }
+
+    /* Badge styling for print */
+    .badge {
+        border: 1px solid #999 !important;
+        background: transparent !important;
+        color: #000000 !important;
+        padding: 3px 8px !important;
+    }
+
+    /* Footer for print */
+    .print-footer {
+        display: block !important;
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid #ddd;
+        text-align: center;
+        font-size: 9pt;
+        color: #666;
+    }
+
+    /* Page break controls */
+    .page-break {
+        page-break-after: always;
+    }
+
+    .no-break {
+        page-break-inside: avoid;
+    }
+}
+
+/* Print header - hidden normally, shown only in print */
+.print-header {
+    display: none;
+}
+
+.print-footer {
+    display: none;
+}

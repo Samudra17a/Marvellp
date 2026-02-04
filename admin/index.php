@@ -23,11 +23,12 @@ $stmt = $pdo->query("
 ");
 $transaksiTerbaru = $stmt->fetchAll();
 
-// Log aktivitas terbaru
+// Log aktivitas terbaru (hanya transaksi dan CRUD, tanpa login/logout)
 $stmt = $pdo->query("
     SELECT l.*, u.nama, u.role 
     FROM log_aktivitas l 
     LEFT JOIN users u ON l.user_id = u.id 
+    WHERE l.aksi NOT IN ('Login', 'Logout')
     ORDER BY l.created_at DESC 
     LIMIT 10
 ");
@@ -96,70 +97,17 @@ $logAktivitas = $stmt->fetchAll();
                         <p class="dashboard-user-role">Administrator</p>
                     </div>
                     <div class="dashboard-user-avatar">
-                        <?= strtoupper(substr($_SESSION['nama'], 0, 1)) ?>
+                        <?php if (!empty($_SESSION['foto']) && file_exists('../assets/images/profiles/' . $_SESSION['foto'])): ?>
+                            <img src="../assets/images/profiles/<?= htmlspecialchars($_SESSION['foto']) ?>" alt="Foto Profil" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        <?php else: ?>
+                            <?= strtoupper(substr($_SESSION['nama'], 0, 1)) ?>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
 
-            <!-- Stats -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-motorcycle"></i></div>
-                    <p class="stat-value">
-                        <?= $totalMotor ?>
-                    </p>
-                    <p class="stat-label">Total Motor</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="color: var(--accent-green);"><i class="fas fa-check-circle"></i></div>
-                    <p class="stat-value">
-                        <?= $motorTersedia ?>
-                    </p>
-                    <p class="stat-label">Motor Tersedia</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="color: var(--accent-orange);"><i class="fas fa-exchange-alt"></i>
-                    </div>
-                    <p class="stat-value">
-                        <?= $totalTransaksi ?>
-                    </p>
-                    <p class="stat-label">Total Transaksi</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
-                    <p class="stat-value" style="font-size: 1.3rem;">
-                        <?= formatRupiah($totalPendapatan) ?>
-                    </p>
-                    <p class="stat-label">Total Pendapatan</p>
-                </div>
-            </div>
-
-            <!-- Quick Stats Row 2 -->
-            <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-user-tie"></i></div>
-                    <p class="stat-value">
-                        <?= $totalPetugas ?>
-                    </p>
-                    <p class="stat-label">Total Petugas</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-users"></i></div>
-                    <p class="stat-value">
-                        <?= $totalPeminjam ?>
-                    </p>
-                    <p class="stat-label">Total Peminjam</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="color: var(--accent-green);"><i class="fas fa-spinner"></i></div>
-                    <p class="stat-value">
-                        <?= $transaksiAktif ?>
-                    </p>
-                    <p class="stat-label">Transaksi Aktif</p>
-                </div>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px;">
+            <!-- Transaksi Terbaru & Log Aktivitas -->
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px; margin-bottom: 25px;">
                 <!-- Transaksi Terbaru -->
                 <div class="table-container">
                     <div class="table-header">
@@ -243,6 +191,39 @@ $logAktivitas = $stmt->fetchAll();
                             <p class="text-center text-muted" style="padding: 20px;">Belum ada aktivitas</p>
                         <?php endif; ?>
                     </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="color: var(--accent-green);"><i class="fas fa-check-circle"></i></div>
+                    <p class="stat-value">
+                        <?= $motorTersedia ?>
+                    </p>
+                    <p class="stat-label">Motor Tersedia</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="color: var(--accent-orange);"><i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <p class="stat-value">
+                        <?= $totalTransaksi ?>
+                    </p>
+                    <p class="stat-label">Total Transaksi</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <p class="stat-value" style="font-size: 1.3rem;">
+                        <?= formatRupiah($totalPendapatan) ?>
+                    </p>
+                    <p class="stat-label">Total Pendapatan</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="color: var(--accent-green);"><i class="fas fa-spinner"></i></div>
+                    <p class="stat-value">
+                        <?= $transaksiAktif ?>
+                    </p>
+                    <p class="stat-label">Transaksi Aktif</p>
                 </div>
             </div>
         </main>

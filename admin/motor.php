@@ -30,8 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        $stmt = $pdo->prepare("INSERT INTO motor (nama_motor, jenis, merk, tahun, plat_nomor, harga_per_hari, gambar, deskripsi) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        if ($stmt->execute([$nama_motor, $jenis, $merk, $tahun, $plat_nomor, $harga_per_hari, $gambar, $deskripsi])) {
+        $stok = $_POST['stok'] ?? 1;
+        $stmt = $pdo->prepare("INSERT INTO motor (nama_motor, jenis, merk, tahun, plat_nomor, harga_per_hari, gambar, deskripsi, stok) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        if ($stmt->execute([$nama_motor, $jenis, $merk, $tahun, $plat_nomor, $harga_per_hari, $gambar, $deskripsi, $stok])) {
             logAktivitas($pdo, $_SESSION['user_id'], 'Tambah Motor', "Menambahkan motor: $nama_motor");
             $message = 'Motor berhasil ditambahkan!';
         } else {
@@ -63,8 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        $stmt = $pdo->prepare("UPDATE motor SET nama_motor=?, jenis=?, merk=?, tahun=?, plat_nomor=?, harga_per_hari=?, gambar=?, deskripsi=?, status=? WHERE id=?");
-        if ($stmt->execute([$nama_motor, $jenis, $merk, $tahun, $plat_nomor, $harga_per_hari, $gambar, $deskripsi, $status, $id])) {
+        $stok = $_POST['stok'] ?? 1;
+        $stmt = $pdo->prepare("UPDATE motor SET nama_motor=?, jenis=?, merk=?, tahun=?, plat_nomor=?, harga_per_hari=?, gambar=?, deskripsi=?, status=?, stok=? WHERE id=?");
+        if ($stmt->execute([$nama_motor, $jenis, $merk, $tahun, $plat_nomor, $harga_per_hari, $gambar, $deskripsi, $status, $stok, $id])) {
             logAktivitas($pdo, $_SESSION['user_id'], 'Edit Motor', "Mengedit motor: $nama_motor");
             $message = 'Motor berhasil diupdate!';
         } else {
@@ -111,6 +113,8 @@ $motors = $pdo->query("SELECT * FROM motor ORDER BY id DESC")->fetchAll();
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -151,11 +155,23 @@ $motors = $pdo->query("SELECT * FROM motor ORDER BY id DESC")->fetchAll();
 
         <!-- Main Content -->
         <main class="main-content">
+            <!-- Print Header -->
+            <div class="print-header">
+                <div class="company-name">MARVELL RENTAL</div>
+                <h1>Data Motor</h1>
+                <p class="print-date">Dicetak pada: <?= date('d F Y, H:i') ?> WIB</p>
+            </div>
+
             <div class="dashboard-header">
                 <h1 class="dashboard-title">Data Motor</h1>
-                <button class="btn btn-primary" data-modal="addModal">
-                    <i class="fas fa-plus"></i> Tambah Motor
-                </button>
+                <div style="display: flex; gap: 10px; margin-left: auto;">
+                    <button class="btn btn-primary" data-modal="addModal">
+                        <i class="fas fa-plus"></i> Tambah Motor
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> Cetak PDF
+                    </button>
+                </div>
             </div>
 
             <?php if ($message): ?>
@@ -182,6 +198,7 @@ $motors = $pdo->query("SELECT * FROM motor ORDER BY id DESC")->fetchAll();
                             <th>Jenis</th>
                             <th>Plat Nomor</th>
                             <th>Harga/Hari</th>
+                            <th>Stok</th>
                             <th>Status</th>
                             <th>Aksi</th>
                         </tr>
@@ -215,6 +232,9 @@ $motors = $pdo->query("SELECT * FROM motor ORDER BY id DESC")->fetchAll();
                                     </td>
                                     <td style="color: var(--primary);">
                                         <?= formatRupiah($motor['harga_per_hari']) ?>
+                                    </td>
+                                    <td style="color: var(--primary);">
+                                        <?= $motor['stok'] ?? 1 ?>
                                     </td>
                                     <td>
                                         <?php
@@ -304,6 +324,12 @@ $motors = $pdo->query("SELECT * FROM motor ORDER BY id DESC")->fetchAll();
                 </div>
 
                 <div class="form-group">
+                    <label class="form-label">Stok *</label>
+                    <input type="number" name="stok" class="form-control" value="1" min="0" required>
+                    <small style="color: var(--text-secondary);">Jumlah unit motor yang tersedia</small>
+                </div>
+
+                <div class="form-group">
                     <label class="form-label">Gambar</label>
                     <input type="file" name="gambar" class="form-control" accept="image/*">
                 </div>
@@ -378,6 +404,12 @@ $motors = $pdo->query("SELECT * FROM motor ORDER BY id DESC")->fetchAll();
                 </div>
 
                 <div class="form-group">
+                    <label class="form-label">Stok *</label>
+                    <input type="number" name="stok" id="edit_stok" class="form-control" min="0" required>
+                    <small style="color: var(--text-secondary);">Jumlah unit motor yang tersedia</small>
+                </div>
+
+                <div class="form-group">
                     <label class="form-label">Gambar (kosongkan jika tidak diubah)</label>
                     <input type="file" name="gambar" class="form-control" accept="image/*">
                 </div>
@@ -410,6 +442,7 @@ $motors = $pdo->query("SELECT * FROM motor ORDER BY id DESC")->fetchAll();
             document.getElementById('edit_plat_nomor').value = motor.plat_nomor;
             document.getElementById('edit_harga_per_hari').value = motor.harga_per_hari;
             document.getElementById('edit_status').value = motor.status;
+            document.getElementById('edit_stok').value = motor.stok || 1;
             document.getElementById('edit_deskripsi').value = motor.deskripsi;
             document.getElementById('edit_gambar_lama').value = motor.gambar;
 

@@ -10,13 +10,14 @@ $endDate = $_GET['end'] ?? '';
 // Build query with optional date filter
 $sql = "
     SELECT p.*, u.nama as nama_peminjam, u.no_hp, m.nama_motor, m.jenis, m.plat_nomor,
-           n.nomor_pesanan, n.acc_by,
+           n.nomor_pesanan, 
+           COALESCE(p.processed_by, n.acc_by) as processed_by_id,
            pt.nama as nama_petugas
     FROM peminjaman p 
     JOIN users u ON p.user_id = u.id 
     JOIN motor m ON p.motor_id = m.id 
     LEFT JOIN nota n ON p.id = n.peminjaman_id
-    LEFT JOIN users pt ON n.acc_by = pt.id
+    LEFT JOIN users pt ON COALESCE(p.processed_by, n.acc_by) = pt.id
 ";
 
 $params = [];
@@ -44,6 +45,8 @@ $transaksi = $stmt->fetchAll();
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -85,8 +88,18 @@ $transaksi = $stmt->fetchAll();
 
         <!-- Main Content -->
         <main class="main-content">
+            <!-- Print Header -->
+            <div class="print-header">
+                <div class="company-name">MARVELL RENTAL</div>
+                <h1>Semua Transaksi</h1>
+                <p class="print-date">Dicetak pada: <?= date('d F Y, H:i') ?> WIB</p>
+            </div>
+
             <div class="dashboard-header">
                 <h1 class="dashboard-title">Semua Transaksi</h1>
+                <button class="btn btn-secondary" onclick="window.print()" style="margin-left: auto;">
+                    <i class="fas fa-print"></i> Cetak PDF
+                </button>
             </div>
 
             <!-- Filter -->
@@ -94,11 +107,21 @@ $transaksi = $stmt->fetchAll();
                 <form method="GET" style="display: flex; gap: 15px; align-items: flex-end; flex-wrap: wrap;">
                     <div class="form-group" style="margin-bottom: 0;">
                         <label class="form-label">Tanggal Mulai</label>
-                        <input type="date" name="start" class="form-control" value="<?= $startDate ?>" readonly onclick="this.showPicker()" style="cursor: pointer;">
+                        <div style="display: flex; gap: 5px;">
+                            <input type="date" name="start" id="dateStart" class="form-control" value="<?= $startDate ?>">
+                            <button type="button" class="btn btn-secondary" onclick="document.getElementById('dateStart').showPicker()" style="padding: 8px 12px;">
+                                <i class="fas fa-calendar-alt"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="form-group" style="margin-bottom: 0;">
                         <label class="form-label">Tanggal Akhir</label>
-                        <input type="date" name="end" class="form-control" value="<?= $endDate ?>" readonly onclick="this.showPicker()" style="cursor: pointer;">
+                        <div style="display: flex; gap: 5px;">
+                            <input type="date" name="end" id="dateEnd" class="form-control" value="<?= $endDate ?>">
+                            <button type="button" class="btn btn-secondary" onclick="document.getElementById('dateEnd').showPicker()" style="padding: 8px 12px;">
+                                <i class="fas fa-calendar-alt"></i>
+                            </button>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-secondary">
                         <i class="fas fa-filter"></i> Filter

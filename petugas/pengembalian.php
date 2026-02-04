@@ -72,7 +72,7 @@ $aktif = $stmt->fetchAll();
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <div class="sidebar-logo">MR</div>
-                <span class="sidebar-title">Petugas Panel</span>
+                <span class="sidebar-title">Marvell Rental</span>
             </div>
 
             <div class="sidebar-menu">
@@ -81,14 +81,7 @@ $aktif = $stmt->fetchAll();
                     <li><a href="index.php"><i class="fas fa-home"></i> Dashboard</a></li>
                     <li><a href="peminjaman.php"><i class="fas fa-clipboard-list"></i> Pengajuan Peminjaman</a></li>
                     <li><a href="pengembalian.php" class="active"><i class="fas fa-undo"></i> Pengembalian</a></li>
-                    <li><a href="laporan.php"><i class="fas fa-file-alt"></i> Laporan</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-menu">
-                <p class="sidebar-menu-title">Akun</p>
-                <ul class="sidebar-nav">
-                    <li><a href="../auth/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <li><a href="profil.php"><i class="fas fa-user-cog"></i> Profil</a></li>
                 </ul>
             </div>
         </aside>
@@ -173,7 +166,7 @@ $aktif = $stmt->fetchAll();
                                     </td>
                                     <td>
                                         <button class="btn btn-sm btn-primary"
-                                            onclick="openReturn(<?= htmlspecialchars(json_encode($a)) ?>, <?= $lateDays ?>, <?= $a['harga_per_hari'] ?>)">
+                                            onclick="openReturn(<?= htmlspecialchars(json_encode($a)) ?>, <?= $lateDays ?>, <?= $a['total_harga'] ?>)">
                                             <i class="fas fa-undo"></i> Kembalikan
                                         </button>
                                     </td>
@@ -216,8 +209,9 @@ $aktif = $stmt->fetchAll();
 
                 <div class="form-group">
                     <label class="form-label">Denda (Rp)</label>
-                    <input type="number" name="denda" id="return_denda" class="form-control" value="0" min="0">
-                    <small style="color: var(--text-secondary);">Denda keterlambatan: 150% harga per hari</small>
+                    <input type="text" name="denda" id="return_denda" class="form-control" value="0" 
+                           inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <small style="color: var(--text-secondary);">Denda keterlambatan: 5% dari total harga sewa per hari</small>
                 </div>
 
                 <div class="form-group">
@@ -235,11 +229,11 @@ $aktif = $stmt->fetchAll();
     <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     <script src="../assets/js/main.js"></script>
     <script>
-        function openReturn(data, lateDays, hargaPerHari) {
+        function openReturn(data, lateDays, totalHarga) {
             document.getElementById('return_id').value = data.id;
 
-            // Calculate late fee
-            const denda = lateDays * (hargaPerHari * 1.5);
+            // Calculate late fee: 5% of total rental price per late day
+            const denda = lateDays * (totalHarga * 0.05);
             document.getElementById('return_denda').value = Math.round(denda);
 
             document.getElementById('returnInfo').innerHTML = `

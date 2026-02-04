@@ -94,7 +94,7 @@ $motors = $stmt->fetchAll();
                 </div>
             </div>
             <div class="hero-image">
-                <img src="assets/images/yamaha_nmax.png" alt="Yamaha NMAX"
+                <img src="assets/images/motor_1769996759.png" alt="CBR 150R"
                     onerror="this.src='https://via.placeholder.com/500x300/1a1a1a/FFD700?text=Motor+Sport'">
             </div>
         </div>

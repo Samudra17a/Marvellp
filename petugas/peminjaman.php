@@ -18,9 +18,9 @@ if (isset($_GET['action'])) {
         $peminjaman = $stmt->fetch();
 
         if ($peminjaman && $peminjaman['status'] === 'menunggu') {
-            // Update status
-            $stmt = $pdo->prepare("UPDATE peminjaman SET status = 'disetujui' WHERE id = ?");
-            $stmt->execute([$id]);
+            // Update status and processed_by
+            $stmt = $pdo->prepare("UPDATE peminjaman SET status = 'disetujui', processed_by = ? WHERE id = ?");
+            $stmt->execute([$_SESSION['user_id'], $id]);
 
             // Update motor status
             $stmt = $pdo->prepare("UPDATE motor SET status = 'disewa' WHERE id = ?");
@@ -34,11 +34,16 @@ if (isset($_GET['action'])) {
             logAktivitas($pdo, $_SESSION['user_id'], 'ACC Peminjaman', "Menyetujui peminjaman: " . $peminjaman['nama_motor']);
             $message = 'Peminjaman berhasil disetujui! Nota: ' . $nomorPesanan;
         }
-    } elseif ($action === 'tolak') {
-        $stmt = $pdo->prepare("UPDATE peminjaman SET status = 'ditolak' WHERE id = ? AND status = 'menunggu'");
-        if ($stmt->execute([$id])) {
-            logAktivitas($pdo, $_SESSION['user_id'], 'Tolak Peminjaman', "Menolak peminjaman ID: $id");
-            $message = 'Peminjaman ditolak!';
+    } elseif ($action === 'tolak' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        $alasan = $_POST['alasan_tolak'] ?? '';
+        if (empty(trim($alasan))) {
+            $error = 'Alasan penolakan wajib diisi!';
+        } else {
+            $stmt = $pdo->prepare("UPDATE peminjaman SET status = 'ditolak', alasan_tolak = ?, processed_by = ? WHERE id = ? AND status = 'menunggu'");
+            if ($stmt->execute([$alasan, $_SESSION['user_id'], $id])) {
+                logAktivitas($pdo, $_SESSION['user_id'], 'Tolak Peminjaman', "Menolak peminjaman ID: $id. Alasan: $alasan");
+                $message = 'Peminjaman ditolak!';
+            }
         }
     }
 }
@@ -79,7 +84,7 @@ $pengajuan = $stmt->fetchAll();
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <div class="sidebar-logo">MR</div>
-                <span class="sidebar-title">Petugas Panel</span>
+                <span class="sidebar-title">Marvell Rental</span>
             </div>
 
             <div class="sidebar-menu">
@@ -89,14 +94,7 @@ $pengajuan = $stmt->fetchAll();
                     <li><a href="peminjaman.php" class="active"><i class="fas fa-clipboard-list"></i> Pengajuan
                             Peminjaman</a></li>
                     <li><a href="pengembalian.php"><i class="fas fa-undo"></i> Pengembalian</a></li>
-                    <li><a href="laporan.php"><i class="fas fa-file-alt"></i> Laporan</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-menu">
-                <p class="sidebar-menu-title">Akun</p>
-                <ul class="sidebar-nav">
-                    <li><a href="../auth/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <li><a href="profil.php"><i class="fas fa-user-cog"></i> Profil</a></li>
                 </ul>
             </div>
         </aside>
@@ -202,11 +200,11 @@ $pengajuan = $stmt->fetchAll();
                                                 onclick="return confirm('ACC peminjaman ini?')">
                                                 <i class="fas fa-check"></i> ACC
                                             </a>
-                                            <a href="?action=tolak&id=<?= $p['id'] ?>&filter=menunggu" class="btn btn-sm"
+                                            <button type="button" class="btn btn-sm"
                                                 style="background: var(--accent-red); color: #fff;"
-                                                onclick="return confirm('Tolak peminjaman ini?')">
+                                                onclick="openRejectModal(<?= $p['id'] ?>, '<?= htmlspecialchars($p['nama_peminjam']) ?>', '<?= htmlspecialchars($p['nama_motor']) ?>')">
                                                 <i class="fas fa-times"></i>
-                                            </a>
+                                            </button>
                                         </td>
                                     <?php endif; ?>
                                 </tr>
@@ -222,8 +220,46 @@ $pengajuan = $stmt->fetchAll();
         </main>
     </div>
 
+    <!-- Rejection Modal -->
+    <div class="modal-overlay" id="rejectModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Tolak Pengajuan</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form method="POST" action="" id="rejectForm">
+                <input type="hidden" name="action" value="tolak">
+                
+                <div id="rejectInfo" style="background: var(--bg-light); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                    <!-- Filled by JS -->
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Alasan Penolakan <span style="color: var(--accent-red);">*</span></label>
+                    <textarea name="alasan_tolak" class="form-control" rows="4" required
+                        placeholder="Masukkan alasan mengapa pengajuan ini ditolak..."></textarea>
+                    <small style="color: var(--text-secondary);">Alasan ini akan ditampilkan kepada peminjam</small>
+                </div>
+
+                <button type="submit" class="btn btn-block" style="background: var(--accent-red); color: #fff;">
+                    <i class="fas fa-times"></i> Tolak Pengajuan
+                </button>
+            </form>
+        </div>
+    </div>
+
     <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
     <script src="../assets/js/main.js"></script>
+    <script>
+        function openRejectModal(id, peminjam, motor) {
+            document.getElementById('rejectForm').action = `?action=tolak&id=${id}&filter=menunggu`;
+            document.getElementById('rejectInfo').innerHTML = `
+                <p style="margin-bottom: 8px;"><strong>Peminjam:</strong> ${peminjam}</p>
+                <p><strong>Motor:</strong> ${motor}</p>
+            `;
+            document.getElementById('rejectModal').classList.add('active');
+        }
+    </script>
 </body>
 
 </html>

@@ -41,7 +41,7 @@ $pengajuan = $stmt->fetchAll();
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <div class="sidebar-logo">MR</div>
-                <span class="sidebar-title">Petugas Panel</span>
+                <span class="sidebar-title">Marvell Rental</span>
             </div>
 
             <div class="sidebar-menu">
@@ -50,14 +50,7 @@ $pengajuan = $stmt->fetchAll();
                     <li><a href="index.php" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
                     <li><a href="peminjaman.php"><i class="fas fa-clipboard-list"></i> Pengajuan Peminjaman</a></li>
                     <li><a href="pengembalian.php"><i class="fas fa-undo"></i> Pengembalian</a></li>
-                    <li><a href="laporan.php"><i class="fas fa-file-alt"></i> Laporan</a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-menu">
-                <p class="sidebar-menu-title">Akun</p>
-                <ul class="sidebar-nav">
-                    <li><a href="../auth/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <li><a href="profil.php"><i class="fas fa-user-cog"></i> Profil</a></li>
                 </ul>
             </div>
         </aside>
@@ -74,7 +67,11 @@ $pengajuan = $stmt->fetchAll();
                         <p class="dashboard-user-role">Petugas</p>
                     </div>
                     <div class="dashboard-user-avatar">
-                        <?= strtoupper(substr($_SESSION['nama'], 0, 1)) ?>
+                        <?php if (!empty($_SESSION['foto']) && file_exists('../assets/images/profiles/' . $_SESSION['foto'])): ?>
+                            <img src="../assets/images/profiles/<?= htmlspecialchars($_SESSION['foto']) ?>" alt="Foto Profil" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        <?php else: ?>
+                            <?= strtoupper(substr($_SESSION['nama'], 0, 1)) ?>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -145,9 +142,8 @@ $pengajuan = $stmt->fetchAll();
                                         <?= formatRupiah($p['total_harga']) ?>
                                     </td>
                                     <td>
-                                        <a href="peminjaman.php?action=acc&id=<?= $p['id'] ?>" class="btn btn-sm btn-primary"
-                                            onclick="return confirm('ACC peminjaman ini?')">
-                                            <i class="fas fa-check"></i>
+                                        <a href="peminjaman.php" class="btn btn-sm btn-secondary">
+                                            <i class="fas fa-eye"></i> Lihat
                                         </a>
                                     </td>
                                 </tr>

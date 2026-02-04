@@ -84,6 +84,8 @@ $countAll = $countMatic + $countSport + $countSupermoto;
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Flatpickr Date Picker -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
@@ -145,6 +147,36 @@ $countAll = $countMatic + $countSport + $countSupermoto;
             padding: 2px 8px;
             border-radius: 20px;
             font-size: 0.8rem;
+        }
+
+        .stock-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .stock-available {
+            background: rgba(40, 167, 69, 0.9);
+            color: #fff;
+        }
+
+        .stock-empty {
+            background: rgba(220, 53, 69, 0.9);
+            color: #fff;
+        }
+
+        .vehicle-card-image {
+            position: relative;
+        }
+
+        .btn-disabled {
+            opacity: 0.5;
+            cursor: not-allowed !important;
         }
 
         .category-tab.active .count {
@@ -217,8 +249,14 @@ $countAll = $countMatic + $countSport + $countSupermoto;
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;">
                 <?php if (count($motors) > 0): ?>
                     <?php foreach ($motors as $motor): ?>
+                        <?php $stok = $motor['stok'] ?? 1; ?>
                         <div class="vehicle-card" style="flex: none;">
                             <div class="vehicle-card-image">
+                                <?php if ($stok > 0): ?>
+                                    <span class="stock-badge stock-available"><i class="fas fa-check-circle"></i> Stok: <?= $stok ?></span>
+                                <?php else: ?>
+                                    <span class="stock-badge stock-empty"><i class="fas fa-times-circle"></i> Habis</span>
+                                <?php endif; ?>
                                 <?php if ($motor['gambar'] && file_exists('../assets/images/' . $motor['gambar'])): ?>
                                     <img src="../assets/images/<?= htmlspecialchars($motor['gambar']) ?>"
                                         alt="<?= htmlspecialchars($motor['nama_motor']) ?>">
@@ -236,10 +274,17 @@ $countAll = $countMatic + $countSport + $countSupermoto;
                                 <?= formatRupiah($motor['harga_per_hari']) ?>
                                 <span>/hari</span>
                             </p>
-                            <button class="btn btn-primary btn-block"
-                                onclick="openSewa(<?= htmlspecialchars(json_encode($motor)) ?>)">
-                                <i class="fas fa-motorcycle"></i> Sewa Sekarang
-                            </button>
+                            <?php if ($stok > 0): ?>
+                                <button class="btn btn-primary btn-block"
+                                    onclick="openSewa(<?= htmlspecialchars(json_encode($motor)) ?>)">
+                                    <i class="fas fa-motorcycle"></i> Sewa Sekarang
+                                </button>
+                            <?php else: ?>
+                                <button class="btn btn-secondary btn-block btn-disabled"
+                                    onclick="showNotAvailable('<?= htmlspecialchars($motor['nama_motor']) ?>')">
+                                    <i class="fas fa-ban"></i> Tidak Tersedia
+                                </button>
+                            <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
@@ -344,7 +389,25 @@ $countAll = $countMatic + $countSport + $countSupermoto;
             }
         });
 
+        function showNotAvailable(motorName) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Motor Tidak Tersedia',
+                html: `<p>Maaf, <strong>${motorName}</strong> sedang tidak tersedia.</p><p>Stok motor habis, silakan pilih motor lain atau coba lagi nanti.</p>`,
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#FFD700',
+                background: '#1a1a1a',
+                color: '#fff'
+            });
+        }
+
         function openSewa(motor) {
+            // Check stock before opening modal
+            if ((motor.stok ?? 1) <= 0) {
+                showNotAvailable(motor.nama_motor);
+                return;
+            }
+
             document.getElementById('sewa_motor_id').value = motor.id;
             document.getElementById('harga_per_hari').value = motor.harga_per_hari;
             document.getElementById('display_harga').textContent = formatRupiah(motor.harga_per_hari);
@@ -352,6 +415,7 @@ $countAll = $countMatic + $countSport + $countSupermoto;
             document.getElementById('motorInfo').innerHTML = `
                 <p style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 5px;">${motor.nama_motor}</p>
                 <p style="color: var(--text-secondary);">${motor.merk} | ${motor.jenis} | ${motor.plat_nomor}</p>
+                <p style="color: var(--accent-green); font-size: 0.85rem; margin-top: 5px;"><i class="fas fa-check-circle"></i> Stok tersedia: ${motor.stok ?? 1} unit</p>
             `;
 
             // Reset dates

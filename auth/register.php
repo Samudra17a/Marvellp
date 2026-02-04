@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../database/koneksi.php';
+require_once '../database/email_config.php';
 
 // Cek jika sudah login
 if (isset($_SESSION['user_id'])) {
@@ -63,39 +64,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt = $pdo->prepare("INSERT INTO otp_verification (email, otp_code, expires_at) VALUES (?, ?, ?)");
                 $stmt->execute([$email, $otp, $expires_at]);
 
-                // Send email (using PHP mail function - configure SMTP for production)
-                $to = $email;
-                $subject = "Kode OTP Marvell Rental";
-                $message = "
-                <html>
-                <head>
-                    <title>Kode Verifikasi OTP</title>
-                </head>
-                <body style='font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px;'>
-                    <div style='max-width: 500px; margin: 0 auto; background: #fff; border-radius: 10px; padding: 30px;'>
-                        <h2 style='color: #C9A100; text-align: center;'>Marvell Rental</h2>
-                        <p>Halo,</p>
-                        <p>Kode OTP Anda untuk verifikasi email adalah:</p>
-                        <h1 style='text-align: center; font-size: 40px; letter-spacing: 10px; color: #333; background: #f0f0f0; padding: 20px; border-radius: 10px;'>{$otp}</h1>
-                        <p style='color: #666;'>Kode ini berlaku selama 15 menit.</p>
-                        <p style='color: #999; font-size: 12px;'>Jika Anda tidak melakukan registrasi, abaikan email ini.</p>
-                    </div>
-                </body>
-                </html>
-                ";
-
-                $headers = "MIME-Version: 1.0\r\n";
-                $headers .= "Content-type: text/html; charset=UTF-8\r\n";
-                $headers .= "From: Marvell Rental <noreply@marvellrental.com>\r\n";
-
-                // Try to send email (may fail on localhost without SMTP)
-                @mail($to, $subject, $message, $headers);
-
+                // Send OTP email using PHPMailer (configured in email_config.php)
+                $emailResult = sendOTPEmail($email, $otp);
+                
                 // Store email in session for next step
                 $_SESSION['register_email'] = $email;
                 $_SESSION['register_step'] = 2;
                 $step = 2;
-                $success = "Kode OTP telah dikirim ke {$email}. (Untuk testing: {$otp})";
+                
+                if ($emailResult['success']) {
+                    $success = "Kode OTP telah dikirim ke {$email}. Silakan cek inbox/spam email Anda.";
+                } else {
+                    // Email gagal tapi tetap lanjut (untuk development/testing)
+                    $success = "Kode OTP telah dikirim ke {$email}. (Debug: {$otp})";
+                }
             }
         }
     }

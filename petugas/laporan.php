@@ -65,7 +65,7 @@ foreach ($laporan as $l) {
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <div class="sidebar-logo">MR</div>
-                <span class="sidebar-title">Petugas Panel</span>
+                <span class="sidebar-title">Marvell Rental</span>
             </div>
 
             <div class="sidebar-menu">

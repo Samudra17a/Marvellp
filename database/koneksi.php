@@ -27,15 +27,16 @@ function generateNomorPesanan()
     return 'MRV-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -5));
 }
 
-// Fungsi untuk menghitung denda
-function hitungDenda($tanggal_kembali, $tanggal_kembali_aktual, $harga_per_hari)
+// Fungsi untuk menghitung denda keterlambatan
+// Denda = 5% dari total harga sewa per hari keterlambatan
+function hitungDenda($tanggal_kembali, $tanggal_kembali_aktual, $total_harga)
 {
     $tglKembali = new DateTime($tanggal_kembali);
     $tglAktual = new DateTime($tanggal_kembali_aktual);
 
     if ($tglAktual > $tglKembali) {
         $selisih = $tglAktual->diff($tglKembali)->days;
-        return $selisih * ($harga_per_hari * 1.5); // Denda 150% dari harga per hari
+        return $selisih * ($total_harga * 0.05); // Denda 5% dari total harga per hari
     }
     return 0;
 }

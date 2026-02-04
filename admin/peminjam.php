@@ -44,6 +44,8 @@ $peminjam = $pdo->query("SELECT * FROM users WHERE role = 'peminjam' ORDER BY id
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -84,8 +86,18 @@ $peminjam = $pdo->query("SELECT * FROM users WHERE role = 'peminjam' ORDER BY id
 
         <!-- Main Content -->
         <main class="main-content">
+            <!-- Print Header -->
+            <div class="print-header">
+                <div class="company-name">MARVELL RENTAL</div>
+                <h1>Data Peminjam</h1>
+                <p class="print-date">Dicetak pada: <?= date('d F Y, H:i') ?> WIB</p>
+            </div>
+
             <div class="dashboard-header">
                 <h1 class="dashboard-title">Data Peminjam</h1>
+                <button class="btn btn-secondary" onclick="window.print()" style="margin-left: auto;">
+                    <i class="fas fa-print"></i> Cetak PDF
+                </button>
             </div>
 
             <?php if ($message): ?>

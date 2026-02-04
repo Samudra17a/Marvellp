@@ -89,6 +89,8 @@ $petugas = $pdo->query("SELECT * FROM users WHERE role = 'petugas' ORDER BY id D
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -129,11 +131,23 @@ $petugas = $pdo->query("SELECT * FROM users WHERE role = 'petugas' ORDER BY id D
 
         <!-- Main Content -->
         <main class="main-content">
+            <!-- Print Header -->
+            <div class="print-header">
+                <div class="company-name">MARVELL RENTAL</div>
+                <h1>Data Petugas</h1>
+                <p class="print-date">Dicetak pada: <?= date('d F Y, H:i') ?> WIB</p>
+            </div>
+
             <div class="dashboard-header">
                 <h1 class="dashboard-title">Data Petugas</h1>
-                <button class="btn btn-primary" data-modal="addModal">
-                    <i class="fas fa-plus"></i> Tambah Petugas
-                </button>
+                <div style="display: flex; gap: 10px; margin-left: auto;">
+                    <button class="btn btn-primary" data-modal="addModal">
+                        <i class="fas fa-plus"></i> Tambah Petugas
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> Cetak PDF
+                    </button>
+                </div>
             </div>
 
             <?php if ($message): ?>
