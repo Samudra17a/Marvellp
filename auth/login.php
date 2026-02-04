@@ -110,6 +110,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <i class="fas fa-sign-in-alt"></i>
                         Login
                     </button>
+                    
+                    <p style="text-align: center; margin-top: 15px;">
+                        <a href="forgot_password.php" style="color: var(--primary); font-size: 0.9rem;">
+                            <i class="fas fa-key"></i> Lupa Password?
+                        </a>
+                    </p>
                 </form>
 
                 <div class="auth-footer">

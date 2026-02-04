@@ -306,23 +306,23 @@ $motors = $stmt->fetchAll();
             <div class="steps-grid">
                 <div class="step-card">
                     <div class="step-number">1</div>
-                    <h3 class="step-title">Daftar Akun</h3>
-                    <p class="step-desc">Buat akun dengan mengisi data diri Anda secara lengkap</p>
+                    <h3 class="step-title">Daftar & Verifikasi</h3>
+                    <p class="step-desc">Masukkan email, verifikasi dengan kode OTP, lalu lengkapi data diri Anda</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">2</div>
-                    <h3 class="step-title">Pilih Motor</h3>
-                    <p class="step-desc">Pilih motor sesuai kebutuhan dan tentukan tanggal sewa</p>
+                    <h3 class="step-title">Pilih Motor & Ajukan</h3>
+                    <p class="step-desc">Login, pilih motor yang tersedia, tentukan tanggal sewa dan ajukan peminjaman</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">3</div>
-                    <h3 class="step-title">Konfirmasi</h3>
-                    <p class="step-desc">Tunggu konfirmasi dari petugas kami via WhatsApp/telepon</p>
+                    <h3 class="step-title">Tunggu Persetujuan</h3>
+                    <p class="step-desc">Petugas akan memproses pengajuan Anda dan menghubungi via WhatsApp/telepon</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">4</div>
                     <h3 class="step-title">Ambil Motor</h3>
-                    <p class="step-desc">Datang ke lokasi dengan KTP/SIM untuk mengambil motor</p>
+                    <p class="step-desc">Setelah disetujui, datang ke lokasi dengan KTP/SIM untuk mengambil motor</p>
                 </div>
             </div>
         </div>

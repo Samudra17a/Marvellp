@@ -1,34 +1,11 @@
 <?php
-/**
- * Konfigurasi Email SMTP untuk Marvell Rental
- * Menggunakan Gmail SMTP untuk mengirim OTP
- */
-
 // Konfigurasi SMTP Gmail
 define('SMTP_HOST', 'smtp.gmail.com');
 define('SMTP_PORT', 587);
 define('SMTP_USERNAME', 'siyoshh21@gmail.com');
-define('SMTP_PASSWORD', ''); // Isi dengan App Password Gmail Anda
+define('SMTP_PASSWORD', 'yvajfmpvmoomezud'); // Isi dengan App Password Gmail Anda
 define('SMTP_FROM_EMAIL', 'siyoshh21@gmail.com');
 define('SMTP_FROM_NAME', 'Marvell Rental');
-
-/**
- * PENTING! Untuk menggunakan Gmail sebagai pengirim email:
- * 
- * 1. Aktifkan 2-Step Verification di akun Gmail Anda:
- *    - Buka https://myaccount.google.com/security
- *    - Aktifkan "2-Step Verification"
- * 
- * 2. Buat App Password:
- *    - Buka https://myaccount.google.com/apppasswords
- *    - Pilih "Mail" dan "Windows Computer" (atau sesuai device)
- *    - Klik "Generate"
- *    - Copy password 16 karakter yang muncul
- *    - Paste ke SMTP_PASSWORD di atas (tanpa spasi)
- * 
- * 3. Contoh hasil App Password: "abcd efgh ijkl mnop"
- *    Masukkan tanpa spasi: "abcdefghijklmnop"
- */
 
 /**
  * Fungsi untuk mengirim email menggunakan PHPMailer
