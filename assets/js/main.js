@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initModals();
     initSidebar();
     initAlerts();
+    initLogout();
 });
 
 /* =============================================
@@ -484,4 +485,57 @@ function togglePassword(inputId, iconId) {
             icon.classList.add('fa-eye');
         }
     }
+}
+
+/* =============================================
+   LOGOUT CONFIRMATION (SweetAlert2 Centered)
+   ============================================= */
+function initLogout() {
+    document.querySelectorAll('a[href*="logout"]').forEach(link => {
+        // Remove native confirm onclick if present
+        link.removeAttribute('onclick');
+
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const logoutUrl = this.getAttribute('href');
+
+            // Check if SweetAlert2 is available
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    icon: 'question',
+                    title: 'Logout',
+                    text: 'Apakah Anda yakin ingin keluar?',
+                    showCancelButton: true,
+                    confirmButtonText: '<i class="fas fa-sign-out-alt"></i> Ya, Logout',
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#BF3131',
+                    cancelButtonColor: '#E0E0E0',
+                    reverseButtons: true,
+                    background: '#FFFFFF',
+                    color: '#1a1a1a',
+                    customClass: {
+                        popup: 'marvell-popup',
+                        title: 'marvell-title',
+                        confirmButton: 'marvell-confirm-btn',
+                        cancelButton: 'marvell-cancel-btn'
+                    },
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInUp animate__faster'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutDown animate__faster'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = logoutUrl;
+                    }
+                });
+            } else {
+                // Fallback if SweetAlert2 is not loaded
+                if (confirm('Apakah Anda yakin ingin keluar?')) {
+                    window.location.href = logoutUrl;
+                }
+            }
+        });
+    });
 }

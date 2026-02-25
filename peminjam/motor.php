@@ -396,8 +396,12 @@ $countAll = $countMatic + $countSport + $countSupermoto;
                 html: `<p>Maaf, <strong>${motorName}</strong> sedang tidak tersedia.</p><p>Stok motor habis, silakan pilih motor lain atau coba lagi nanti.</p>`,
                 confirmButtonText: 'OK',
                 confirmButtonColor: '#BF3131',
-                background: '#1a1a1a',
-                color: '#fff'
+                background: '#FFFFFF',
+                color: '#1a1a1a',
+                customClass: {
+                    popup: 'marvell-popup',
+                    confirmButton: 'marvell-confirm-btn'
+                }
             });
         }
 

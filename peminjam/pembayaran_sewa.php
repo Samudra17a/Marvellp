@@ -306,6 +306,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../assets/js/sweetalert-theme.js"></script>
     <script src="../assets/js/main.js"></script>
     <script>
         function selectPayment(element, method) {
@@ -328,7 +330,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text);
-            alert('Nomor rekening disalin!');
+            showToast('Nomor rekening disalin!', 'success');
         }
 
         // Image preview

@@ -1732,20 +1732,32 @@ select.form-control {
 /* =============================================
    SWEETALERT2 THEME OVERRIDES
    ============================================= */
+
+/* Backdrop overlay */
+.swal2-container {
+    backdrop-filter: blur(4px) !important;
+    background: rgba(0, 0, 0, 0.35) !important;
+}
+
 .swal2-popup.marvell-popup {
     background: #FFFFFF !important;
-    border: 1px solid rgba(191, 49, 49, 0.3) !important;
+    border: 1px solid rgba(191, 49, 49, 0.15) !important;
     border-radius: 20px !important;
     font-family: var(--font-main) !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(191, 49, 49, 0.05) !important;
+    padding: 2em 2em 1.5em !important;
 }
 
 .swal2-title.marvell-title {
     color: #1a1a1a !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
+    font-size: 1.4rem !important;
 }
 
 .swal2-html-container {
     color: #666666 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
 }
 
 .swal2-confirm.marvell-confirm-btn {
@@ -1755,19 +1767,28 @@ select.form-control {
     font-weight: 600 !important;
     padding: 12px 30px !important;
     border: none !important;
+    font-family: var(--font-main) !important;
+    transition: all 0.3s ease !important;
 }
 
 .swal2-confirm.marvell-confirm-btn:hover {
-    box-shadow: 0 4px 20px rgba(191, 49, 49, 0.3) !important;
+    box-shadow: 0 6px 25px rgba(191, 49, 49, 0.4) !important;
+    transform: translateY(-1px) !important;
 }
 
 .swal2-cancel.marvell-cancel-btn {
-    background: #E0E0E0 !important;
+    background: #F5F5F5 !important;
     color: #1a1a1a !important;
     border-radius: 50px !important;
     font-weight: 500 !important;
     padding: 12px 30px !important;
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    font-family: var(--font-main) !important;
+    transition: all 0.3s ease !important;
+}
+
+.swal2-cancel.marvell-cancel-btn:hover {
+    background: #E0E0E0 !important;
 }
 
 .swal2-deny.marvell-deny-btn {
@@ -1776,6 +1797,7 @@ select.form-control {
     border-radius: 50px !important;
     font-weight: 500 !important;
     padding: 12px 30px !important;
+    font-family: var(--font-main) !important;
 }
 
 .swal2-icon.swal2-success {
@@ -1818,6 +1840,27 @@ select.form-control {
 
 /* Timer progress bar */
 .swal2-timer-progress-bar {
+    background: linear-gradient(90deg, #8B1A1A, #BF3131) !important;
+}
+
+/* Toast notification style - centered pill */
+.swal2-popup.marvell-toast {
+    background: #FFFFFF !important;
+    border: 1px solid rgba(191, 49, 49, 0.15) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(191, 49, 49, 0.05) !important;
+    font-family: var(--font-main) !important;
+    color: #1a1a1a !important;
+    padding: 12px 20px !important;
+}
+
+.swal2-popup.marvell-toast .swal2-title {
+    color: #1a1a1a !important;
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+}
+
+.swal2-popup.marvell-toast .swal2-timer-progress-bar {
     background: linear-gradient(90deg, #8B1A1A, #BF3131) !important;
 }
 

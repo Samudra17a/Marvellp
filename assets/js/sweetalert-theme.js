@@ -1,6 +1,6 @@
 /**
  * SweetAlert2 Theme Configuration for Marvell Rental
- * Centered notifications with gold-black theme
+ * Centered notifications with light-red theme matching website design
  */
 
 // Default SweetAlert2 configuration with Marvell Rental theme
@@ -12,17 +12,17 @@ const MarvellSwal = Swal.mixin({
         cancelButton: 'marvell-cancel-btn',
         denyButton: 'marvell-deny-btn'
     },
-    background: '#1a1a1a',
-    color: '#ffffff',
-    confirmButtonColor: '#FFD700',
-    cancelButtonColor: '#555',
+    background: '#FFFFFF',
+    color: '#1a1a1a',
+    confirmButtonColor: '#BF3131',
+    cancelButtonColor: '#E0E0E0',
     denyButtonColor: '#FF5252',
-    iconColor: '#FFD700',
+    iconColor: '#BF3131',
     showClass: {
-        popup: 'animate__animated animate__fadeIn animate__faster'
+        popup: 'animate__animated animate__fadeInUp animate__faster'
     },
     hideClass: {
-        popup: 'animate__animated animate__fadeOut animate__faster'
+        popup: 'animate__animated animate__fadeOutDown animate__faster'
     }
 });
 
@@ -95,16 +95,25 @@ function confirmDelete(itemName = 'item ini') {
     });
 }
 
-// Toast notification (top-right, non-blocking)
+// Toast notification (centered, non-blocking)
 const MarvellToast = Swal.mixin({
     toast: true,
-    position: 'top-end',
+    position: 'center',
     showConfirmButton: false,
-    timer: 3000,
+    timer: 2500,
     timerProgressBar: true,
-    background: '#1a1a1a',
-    color: '#ffffff',
-    iconColor: '#FFD700',
+    background: '#FFFFFF',
+    color: '#1a1a1a',
+    iconColor: '#BF3131',
+    customClass: {
+        popup: 'marvell-toast'
+    },
+    showClass: {
+        popup: 'animate__animated animate__fadeIn animate__faster'
+    },
+    hideClass: {
+        popup: 'animate__animated animate__fadeOut animate__faster'
+    },
     didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer);
         toast.addEventListener('mouseleave', Swal.resumeTimer);

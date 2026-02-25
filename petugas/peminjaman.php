@@ -249,6 +249,8 @@ $pengajuan = $stmt->fetchAll();
     </div>
 
     <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../assets/js/sweetalert-theme.js"></script>
     <script src="../assets/js/main.js"></script>
     <script>
         function openRejectModal(id, peminjam, motor) {
