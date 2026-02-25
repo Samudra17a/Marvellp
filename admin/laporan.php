@@ -236,7 +236,7 @@ for ($i = 5; $i >= 0; $i--) {
                 </div>
                 <div class="chart-legend">
                     <div class="legend-item">
-                        <div class="legend-color" style="background: linear-gradient(135deg, #FFD700, #C9A100);"></div>
+                        <div class="legend-color" style="background: linear-gradient(135deg, #BF3131, #8B1A1A);"></div>
                         <span>Pendapatan (Rupiah)</span>
                     </div>
                     <div class="legend-item">
@@ -366,7 +366,7 @@ for ($i = 5; $i >= 0; $i--) {
                         label: 'Pendapatan',
                         data: pendapatanData,
                         backgroundColor: goldGradient,
-                        borderColor: '#FFD700',
+                        borderColor: '#BF3131',
                         borderWidth: 2,
                         borderRadius: 8,
                         yAxisID: 'y'
@@ -404,7 +404,7 @@ for ($i = 5; $i >= 0; $i--) {
                     },
                     tooltip: {
                         backgroundColor: '#1a1a1a',
-                        titleColor: '#FFD700',
+                        titleColor: '#BF3131',
                         bodyColor: '#ffffff',
                         borderColor: 'rgba(255, 215, 0, 0.3)',
                         borderWidth: 1,
@@ -449,7 +449,7 @@ for ($i = 5; $i >= 0; $i--) {
                             drawBorder: false
                         },
                         ticks: {
-                            color: '#FFD700',
+                            color: '#BF3131',
                             font: {
                                 family: 'Poppins',
                                 size: 11
@@ -466,7 +466,7 @@ for ($i = 5; $i >= 0; $i--) {
                         title: {
                             display: true,
                             text: 'Pendapatan & Denda (Rp)',
-                            color: '#FFD700',
+                            color: '#BF3131',
                             font: {
                                 family: 'Poppins',
                                 size: 12,

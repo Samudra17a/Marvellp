@@ -140,122 +140,116 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             <?php endif; ?>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
-                <!-- Profile Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Informasi Profil</h3>
-                    </div>
-
-                    <form method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="action" value="update_profile">
-
-                        <!-- Profile Photo -->
-                        <div style="text-align: center; margin-bottom: 25px;">
-                            <div
-                                style="width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 15px; overflow: hidden; border: 3px solid var(--primary);">
+            <div style="display: flex; gap: 25px; align-items: flex-start;">
+                <!-- Left Sidebar - Photo & Menu -->
+                <div style="width: 280px; flex-shrink: 0;">
+                    <div class="card" style="text-align: center; padding: 30px 20px;">
+                        <form method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="action" value="update_profile">
+                            <div style="width: 130px; height: 130px; border-radius: 50%; margin: 0 auto 15px; overflow: hidden; border: 3px solid var(--primary);">
                                 <?php if ($user['foto'] && file_exists('../assets/images/profiles/' . $user['foto'])): ?>
                                     <img src="../assets/images/profiles/<?= htmlspecialchars($user['foto']) ?>"
                                         alt="Foto Profil" style="width: 100%; height: 100%; object-fit: cover;">
                                 <?php else: ?>
-                                    <div
-                                        style="width: 100%; height: 100%; background: var(--bg-gold); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 700; color: var(--text-dark);">
+                                    <div style="width: 100%; height: 100%; background: var(--bg-gold); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 700; color: var(--text-dark);">
                                         <?= strtoupper(substr($user['nama'], 0, 1)) ?>
                                     </div>
                                 <?php endif; ?>
                             </div>
-                            <label class="btn btn-sm btn-secondary" style="cursor: pointer;">
-                                <i class="fas fa-camera"></i> Ubah Foto
-                                <input type="file" name="foto" accept="image/*" style="display: none;"
-                                    onchange="this.form.submit()">
+                            <p style="font-weight: 600; font-size: 1.1rem; margin-bottom: 3px;"><?= htmlspecialchars($user['nama']) ?></p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 15px;"><?= ucfirst($user['role']) ?></p>
+                            <label class="btn btn-sm btn-secondary" style="cursor: pointer; display: inline-block; width: 100%;">
+                                <i class="fas fa-camera"></i> Pilih Foto
+                                <input type="file" name="foto" accept="image/*" style="display: none;" onchange="this.form.submit()">
                             </label>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Nama Lengkap</label>
-                            <input type="text" name="nama" class="form-control"
-                                value="<?= htmlspecialchars($user['nama']) ?>" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" value="<?= htmlspecialchars($user['email']) ?>"
-                                disabled>
-                            <small style="color: var(--text-secondary);">Email tidak dapat diubah</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">No. HP</label>
-                            <input type="tel" name="no_hp" class="form-control"
-                                value="<?= htmlspecialchars($user['no_hp'] ?? '') ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Alamat</label>
-                            <textarea name="alamat" class="form-control"
-                                rows="3"><?= htmlspecialchars($user['alamat'] ?? '') ?></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-block">
-                            <i class="fas fa-save"></i> Simpan Perubahan
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Change Password Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Ganti Password</h3>
+                            <p style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 10px;">Maks 10 MB. Format: JPG, JPEG, PNG</p>
+                        </form>
                     </div>
-
-                    <form method="POST">
-                        <input type="hidden" name="action" value="change_password">
-
-                        <div class="form-group">
-                            <label class="form-label">Password Lama</label>
-                            <input type="password" name="current_password" class="form-control" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Password Baru</label>
-                            <input type="password" name="new_password" class="form-control" required minlength="6">
-                            <small style="color: var(--text-secondary);">Minimal 6 karakter</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Konfirmasi Password Baru</label>
-                            <input type="password" name="confirm_password" class="form-control" required>
-                        </div>
-
-                        <button type="submit" class="btn btn-secondary btn-block">
-                            <i class="fas fa-key"></i> Ganti Password
-                        </button>
-                    </form>
-
-                    <!-- Account Info -->
-                    <div style="margin-top: 30px; padding-top: 20px; border-top: var(--border-light);">
-                        <h4 style="font-size: 1rem; margin-bottom: 15px; color: var(--text-secondary);">Informasi Akun
-                        </h4>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 10px;">
-                            <i class="fas fa-calendar" style="color: var(--primary); margin-right: 10px;"></i>
-                            Terdaftar:
-                            <?= date('d F Y', strtotime($user['created_at'])) ?>
-                        </p>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">
-                            <i class="fas fa-user-tag" style="color: var(--primary); margin-right: 10px;"></i>
-                            Role:
-                            <?= ucfirst($user['role']) ?>
-                        </p>
+                    <div class="card" style="margin-top: 15px; padding: 0;">
+                        <a href="#passwordSection" onclick="document.getElementById('passwordSection').scrollIntoView({behavior:'smooth'})"
+                            style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; border-bottom: var(--border-light); color: var(--text-primary); text-decoration: none;">
+                            <span><i class="fas fa-key" style="color: var(--primary); margin-right: 10px;"></i> Ubah Kata Sandi</span>
+                            <i class="fas fa-chevron-down" style="color: var(--text-secondary); font-size: 0.8rem;"></i>
+                        </a>
+                        <a href="../auth/logout.php" style="display: flex; align-items: center; padding: 15px 20px; color: var(--accent-red); text-decoration: none;" onclick="return confirm('Yakin ingin logout?')">
+                            <i class="fas fa-sign-out-alt" style="margin-right: 10px;"></i> Logout
+                        </a>
                     </div>
                 </div>
-            </div>
 
-            <!-- Logout Button -->
-            <div style="margin-top: 25px;">
-                <a href="../auth/logout.php" class="btn btn-block"
-                    style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: #fff; padding: 15px; font-size: 1rem;">
-                    <i class="fas fa-sign-out-alt"></i> Logout dari Akun
-                </a>
+                <!-- Right Content -->
+                <div style="flex: 1;">
+                    <div class="card">
+                        <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 25px;">Ubah Biodata Diri</h3>
+                        <form method="POST" enctype="multipart/form-data">
+                            <input type="hidden" name="action" value="update_profile">
+                            <div style="display: flex; align-items: center; padding: 15px 0; border-bottom: var(--border-light);">
+                                <span style="width: 140px; color: var(--text-secondary); font-size: 0.9rem; flex-shrink: 0;">Nama</span>
+                                <input type="text" name="nama" class="form-control" style="margin: 0;" value="<?= htmlspecialchars($user['nama']) ?>" required>
+                            </div>
+                            <div style="display: flex; align-items: center; padding: 15px 0; border-bottom: var(--border-light);">
+                                <span style="width: 140px; color: var(--text-secondary); font-size: 0.9rem; flex-shrink: 0;">No. HP</span>
+                                <input type="tel" name="no_hp" class="form-control" style="margin: 0;" value="<?= htmlspecialchars($user['no_hp'] ?? '') ?>" placeholder="Tambah Nomor HP">
+                            </div>
+                            <div style="display: flex; align-items: flex-start; padding: 15px 0; border-bottom: var(--border-light);">
+                                <span style="width: 140px; color: var(--text-secondary); font-size: 0.9rem; flex-shrink: 0; padding-top: 10px;">Alamat</span>
+                                <textarea name="alamat" class="form-control" style="margin: 0;" rows="2" placeholder="Tambah Alamat"><?= htmlspecialchars($user['alamat'] ?? '') ?></textarea>
+                            </div>
+                            <div style="padding-top: 20px;">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan Perubahan</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card" style="margin-top: 20px;">
+                        <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 25px;">Ubah Kontak</h3>
+                        <div style="display: flex; align-items: center; padding: 15px 0; border-bottom: var(--border-light);">
+                            <span style="width: 140px; color: var(--text-secondary); font-size: 0.9rem; flex-shrink: 0;">Email</span>
+                            <span style="font-size: 0.95rem; margin-right: 12px;"><?= htmlspecialchars($user['email']) ?></span>
+                            <span style="background: var(--accent-green); color: #fff; padding: 3px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: 600;">terverifikasi</span>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 15px 0;">
+                            <span style="width: 140px; color: var(--text-secondary); font-size: 0.9rem; flex-shrink: 0;">Terdaftar</span>
+                            <span style="font-size: 0.95rem;"><?= date('d F Y', strtotime($user['created_at'])) ?></span>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 20px;" id="passwordSection">
+                        <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 25px;"><i class="fas fa-key" style="color: var(--primary); margin-right: 8px;"></i> Ubah Kata Sandi</h3>
+                        <form method="POST">
+                            <input type="hidden" name="action" value="change_password">
+                            <div class="form-group">
+                                <label class="form-label">Password Lama</label>
+                                <div style="position: relative;">
+                                    <input type="password" name="current_password" id="peminjam_current_pw" class="form-control" required style="padding-right: 45px;">
+                                    <button type="button" onclick="togglePassword('peminjam_current_pw', 'peminjamToggle1')" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 5px;">
+                                        <i class="fas fa-eye" id="peminjamToggle1"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Password Baru</label>
+                                <div style="position: relative;">
+                                    <input type="password" name="new_password" id="peminjam_new_pw" class="form-control" required minlength="6" style="padding-right: 45px;">
+                                    <button type="button" onclick="togglePassword('peminjam_new_pw', 'peminjamToggle2')" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 5px;">
+                                        <i class="fas fa-eye" id="peminjamToggle2"></i>
+                                    </button>
+                                </div>
+                                <small style="color: var(--text-secondary);">Minimal 6 karakter</small>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Konfirmasi Password Baru</label>
+                                <div style="position: relative;">
+                                    <input type="password" name="confirm_password" id="peminjam_confirm_pw" class="form-control" required style="padding-right: 45px;">
+                                    <button type="button" onclick="togglePassword('peminjam_confirm_pw', 'peminjamToggle3')" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 5px;">
+                                        <i class="fas fa-eye" id="peminjamToggle3"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-key"></i> Ganti Password</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </main>
     </div>

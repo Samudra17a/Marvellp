@@ -102,8 +102,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <div class="form-group">
                         <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Masukkan password"
-                            required>
+                        <div style="position: relative;">
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Masukkan password"
+                                required style="padding-right: 45px;">
+                            <button type="button" onclick="togglePassword('password', 'toggleIcon1')" 
+                                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 5px;">
+                                <i class="fas fa-eye" id="toggleIcon1"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">

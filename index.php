@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-// Cek jika sudah login, redirect sesuai role
+// Cek jika sudah login, redirect sesuai 
+
 if (isset($_SESSION['user_id'])) {
     switch ($_SESSION['role']) {
         case 'admin':
@@ -95,7 +96,7 @@ $motors = $stmt->fetchAll();
             </div>
             <div class="hero-image">
                 <img src="assets/images/motor_1769996759.png" alt="CBR 150R"
-                    onerror="this.src='https://via.placeholder.com/500x300/1a1a1a/FFD700?text=Motor+Sport'">
+                    onerror="this.src='https://via.placeholder.com/500x300/EEEEEE/BF3131?text=Motor+Sport'">
             </div>
         </div>
     </section>
@@ -120,7 +121,7 @@ $motors = $stmt->fetchAll();
             <!-- Category Tabs -->
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                 <button class="category-filter active" onclick="filterMotor('')"
-                    style="padding: 10px 25px; background: #000; color: #FFD700; border: none; border-radius: 50px; font-weight: 600; cursor: pointer;">
+                    style="padding: 10px 25px; background: #BF3131; color: #fff; border: none; border-radius: 50px; font-weight: 600; cursor: pointer;">
                     <i class="fas fa-motorcycle"></i> Semua
                 </button>
                 <button class="category-filter" onclick="filterMotor('Matic')"
@@ -155,7 +156,7 @@ $motors = $stmt->fetchAll();
                                         <img src="assets/images/<?= htmlspecialchars($motor['gambar']) ?>"
                                             alt="<?= htmlspecialchars($motor['nama_motor']) ?>">
                                     <?php else: ?>
-                                        <img src="https://via.placeholder.com/200x120/1a1a1a/FFD700?text=<?= urlencode($motor['nama_motor']) ?>"
+                                        <img src="https://via.placeholder.com/200x120/EEEEEE/BF3131?text=<?= urlencode($motor['nama_motor']) ?>"
                                             alt="<?= htmlspecialchars($motor['nama_motor']) ?>">
                                     <?php endif; ?>
                                 </div>
@@ -225,7 +226,7 @@ $motors = $stmt->fetchAll();
                             <div class="vehicle-card-image">
                                 <img src="https://www.honda.co.id/uploads/product/gallery/cbr150r/CBR150R-Racing-Red.png"
                                     alt="CBR"
-                                    onerror="this.src='https://via.placeholder.com/200x120/1a1a1a/FFD700?text=Honda+CBR'">
+                                    onerror="this.src='https://via.placeholder.com/200x120/EEEEEE/BF3131?text=Honda+CBR'">
                             </div>
                             <span class="vehicle-card-type">Sport</span>
                             <h3 class="vehicle-card-name">Honda CBR 150R</h3>
@@ -235,7 +236,7 @@ $motors = $stmt->fetchAll();
                         <div class="vehicle-card">
                             <div class="vehicle-card-image">
                                 <img src="https://www.kawasaki.co.id/images/product/klx150-2023.png" alt="KLX"
-                                    onerror="this.src='https://via.placeholder.com/200x120/1a1a1a/FFD700?text=Kawasaki+KLX'">
+                                    onerror="this.src='https://via.placeholder.com/200x120/EEEEEE/BF3131?text=Kawasaki+KLX'">
                             </div>
                             <span class="vehicle-card-type">Supermoto</span>
                             <h3 class="vehicle-card-name">Kawasaki KLX 150</h3>
@@ -246,7 +247,7 @@ $motors = $stmt->fetchAll();
                             <div class="vehicle-card-image">
                                 <img src="https://www.honda.co.id/uploads/product/gallery/crf150l/CRF150L-Extreme-Red.png"
                                     alt="CRF"
-                                    onerror="this.src='https://via.placeholder.com/200x120/1a1a1a/FFD700?text=Honda+CRF'">
+                                    onerror="this.src='https://via.placeholder.com/200x120/EEEEEE/BF3131?text=Honda+CRF'">
                             </div>
                             <span class="vehicle-card-type">Supermoto</span>
                             <h3 class="vehicle-card-name">Honda CRF 150L</h3>
@@ -281,7 +282,7 @@ $motors = $stmt->fetchAll();
                         Kami menyediakan berbagai pilihan motor mulai dari Matic untuk mobilitas harian,
                         Sport untuk sensasi berkendara yang berbeda, hingga Supermoto untuk petualangan off-road.
                     </p>
-                    <a href="auth/register.php" class="btn btn-primary" style="background: #C9A100; margin-top: 20px;">
+                    <a href="auth/register.php" class="btn btn-primary" style="background: #BF3131; margin-top: 20px;">
                         <i class="fas fa-arrow-right"></i>
                         Mulai Sewa Sekarang
                     </a>
@@ -289,7 +290,7 @@ $motors = $stmt->fetchAll();
                 <div class="about-image">
                     <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500" alt="Rental Motor"
                         style="border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);"
-                        onerror="this.src='https://via.placeholder.com/500x300/C9A100/000?text=Marvell+Rental'">
+                        onerror="this.src='https://via.placeholder.com/500x300/EEEEEE/BF3131?text=Marvell+Rental'">
                 </div>
             </div>
         </div>

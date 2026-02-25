@@ -398,14 +398,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         <div class="form-group">
                             <label class="form-label">Password *</label>
-                            <input type="password" name="password" class="form-control" placeholder="Minimal 6 karakter"
-                                required minlength="6">
+                            <div style="position: relative;">
+                                <input type="password" name="password" id="reg_password" class="form-control" placeholder="Minimal 6 karakter"
+                                    required minlength="6" style="padding-right: 45px;">
+                                <button type="button" onclick="togglePassword('reg_password', 'regToggleIcon1')" 
+                                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 5px;">
+                                    <i class="fas fa-eye" id="regToggleIcon1"></i>
+                                </button>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Konfirmasi Password *</label>
-                            <input type="password" name="confirm_password" class="form-control"
-                                placeholder="Ulangi password" required>
+                            <div style="position: relative;">
+                                <input type="password" name="confirm_password" id="reg_confirm_password" class="form-control"
+                                    placeholder="Ulangi password" required style="padding-right: 45px;">
+                                <button type="button" onclick="togglePassword('reg_confirm_password', 'regToggleIcon2')" 
+                                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 5px;">
+                                    <i class="fas fa-eye" id="regToggleIcon2"></i>
+                                </button>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-block">

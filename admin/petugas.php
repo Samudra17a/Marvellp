@@ -250,7 +250,13 @@ $petugas = $pdo->query("SELECT * FROM users WHERE role = 'petugas' ORDER BY id D
 
                 <div class="form-group">
                     <label class="form-label">Password *</label>
-                    <input type="password" name="password" class="form-control" required minlength="6">
+                    <div style="position: relative;">
+                        <input type="password" name="password" id="add_petugas_pw" class="form-control" required minlength="6" style="padding-right: 45px;">
+                        <button type="button" onclick="togglePassword('add_petugas_pw', 'addPetugasToggle')" 
+                            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 5px;">
+                            <i class="fas fa-eye" id="addPetugasToggle"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block">
@@ -288,7 +294,13 @@ $petugas = $pdo->query("SELECT * FROM users WHERE role = 'petugas' ORDER BY id D
 
                 <div class="form-group">
                     <label class="form-label">Password (kosongkan jika tidak diubah)</label>
-                    <input type="password" name="password" class="form-control" minlength="6">
+                    <div style="position: relative;">
+                        <input type="password" name="password" id="edit_petugas_pw" class="form-control" minlength="6" style="padding-right: 45px;">
+                        <button type="button" onclick="togglePassword('edit_petugas_pw', 'editPetugasToggle')" 
+                            style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 5px;">
+                            <i class="fas fa-eye" id="editPetugasToggle"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block">

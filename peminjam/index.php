@@ -102,32 +102,7 @@ $riwayat = $stmt->fetchAll();
                 </div>
             </div>
 
-            <!-- Stats -->
-            <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-receipt"></i></div>
-                    <p class="stat-value">
-                        <?= $total ?>
-                    </p>
-                    <p class="stat-label">Total Peminjaman</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="color: var(--accent-orange);"><i class="fas fa-clock"></i></div>
-                    <p class="stat-value">
-                        <?= $menungguCount ?>
-                    </p>
-                    <p class="stat-label">Menunggu ACC</p>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="color: var(--accent-green);"><i class="fas fa-motorcycle"></i></div>
-                    <p class="stat-value">
-                        <?= $aktifCount ?>
-                    </p>
-                    <p class="stat-label">Sedang Disewa</p>
-                </div>
-            </div>
-
-            <!-- Recent History -->
+            <!-- Recent History (moved up) -->
             <div class="table-container">
                 <div class="table-header">
                     <h3 class="table-title">Riwayat Terbaru</h3>
@@ -182,6 +157,25 @@ $riwayat = $stmt->fetchAll();
                         <?php endif; ?>
                     </tbody>
                 </table>
+            </div>
+
+            <!-- Quick Stats Buttons (moved below riwayat) -->
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
+                <a href="riwayat.php" class="btn btn-sm btn-secondary" style="position: relative; display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; font-size: 0.9rem; text-decoration: none; overflow: visible;">
+                    <i class="fas fa-receipt"></i>
+                    Total Peminjaman
+                    <span style="position: absolute; top: -10px; right: -10px; display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0 5px; box-shadow: 0 2px 6px rgba(191,49,49,0.4);"><?= $total ?></span>
+                </a>
+                <a href="riwayat.php" class="btn btn-sm btn-secondary" style="position: relative; display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; font-size: 0.9rem; text-decoration: none; overflow: visible;">
+                    <i class="fas fa-clock" style="color: var(--accent-orange);"></i>
+                    Menunggu ACC
+                    <span style="position: absolute; top: -10px; right: -10px; display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; border-radius: 50%; background: var(--accent-orange); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0 5px; box-shadow: 0 2px 6px rgba(230,81,0,0.4);"><?= $menungguCount ?></span>
+                </a>
+                <a href="riwayat.php" class="btn btn-sm btn-secondary" style="position: relative; display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; font-size: 0.9rem; text-decoration: none; overflow: visible;">
+                    <i class="fas fa-motorcycle" style="color: var(--accent-green);"></i>
+                    Sedang Disewa
+                    <span style="position: absolute; top: -10px; right: -10px; display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 26px; border-radius: 50%; background: var(--accent-green); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0 5px; box-shadow: 0 2px 6px rgba(46,125,50,0.4);"><?= $aktifCount ?></span>
+                </a>
             </div>
         </main>
     </div>

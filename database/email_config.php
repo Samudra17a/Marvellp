@@ -85,7 +85,7 @@ function sendOTPEmail($email, $otp) {
     <body style='font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; margin: 0;'>
         <div style='max-width: 500px; margin: 0 auto; background: #ffffff; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);'>
             <div style='background: linear-gradient(135deg, #1a1a1a 0%, #333 100%); padding: 30px; text-align: center;'>
-                <h1 style='color: #C9A100; margin: 0; font-size: 28px;'>🏍️ Marvell Rental</h1>
+                <h1 style='color: #BF3131; margin: 0; font-size: 28px;'>🏍️ Marvell Rental</h1>
                 <p style='color: #ffffff; margin: 10px 0 0 0; font-size: 14px;'>Verifikasi Email Anda</p>
             </div>
             
@@ -111,7 +111,7 @@ function sendOTPEmail($email, $otp) {
                 <p style='color: #999; font-size: 12px; margin: 0;'>
                     Jika Anda tidak melakukan registrasi, abaikan email ini.
                 </p>
-                <p style='color: #C9A100; font-size: 11px; margin: 10px 0 0 0;'>
+                <p style='color: #BF3131; font-size: 11px; margin: 10px 0 0 0;'>
                     © 2024 Marvell Rental. All Rights Reserved.
                 </p>
             </div>

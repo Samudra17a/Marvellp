@@ -1,46 +1,46 @@
 /* =============================================
    MARVELL RENTAL - STYLE SYSTEM
-   Theme: Yellow-Black (Gold-Black)
+   Theme: Light-Red (#EEEEEE + #BF3131)
    ============================================= */
 
 /* CSS Variables */
 :root {
     /* Primary Colors */
-    --primary: #FFD700;
-    --primary-dark: #C9A100;
-    --primary-light: #FFE44D;
+    --primary: #BF3131;
+    --primary-dark: #8B1A1A;
+    --primary-light: #D94848;
 
     /* Secondary Colors */
-    --secondary: #D4AF37;
-    --secondary-dark: #996515;
+    --secondary: #A02828;
+    --secondary-dark: #7A1E1E;
 
     /* Background Colors */
-    --bg-dark: #0a0a0a;
-    --bg-darker: #000000;
-    --bg-light: #1a1a1a;
-    --bg-card: #151515;
-    --bg-gold: linear-gradient(135deg, #C9A100 0%, #FFD700 50%, #D4AF37 100%);
-    --bg-hero: linear-gradient(180deg, #1a1a0a 0%, #2a2510 50%, #1a1505 100%);
+    --bg-dark: #EEEEEE;
+    --bg-darker: #E0E0E0;
+    --bg-light: #F5F5F5;
+    --bg-card: #FFFFFF;
+    --bg-gold: linear-gradient(135deg, #BF3131 0%, #D94848 50%, #A02828 100%);
+    --bg-hero: linear-gradient(180deg, #EEEEEE 0%, #E8E0E0 50%, #EEEEEE 100%);
 
     /* Text Colors */
-    --text-primary: #FFFFFF;
-    --text-secondary: #B0B0B0;
-    --text-dark: #0a0a0a;
-    --text-gold: #FFD700;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --text-dark: #FFFFFF;
+    --text-gold: #BF3131;
 
     /* Accent */
-    --accent-green: #00C853;
-    --accent-red: #FF5252;
-    --accent-orange: #FF9800;
+    --accent-green: #2E7D32;
+    --accent-red: #D32F2F;
+    --accent-orange: #E65100;
 
     /* Shadows */
-    --shadow-gold: 0 4px 20px rgba(255, 215, 0, 0.3);
-    --shadow-dark: 0 4px 20px rgba(0, 0, 0, 0.5);
-    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --shadow-gold: 0 4px 20px rgba(191, 49, 49, 0.3);
+    --shadow-dark: 0 4px 20px rgba(0, 0, 0, 0.15);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.1);
 
     /* Border */
-    --border-gold: 1px solid rgba(255, 215, 0, 0.3);
-    --border-light: 1px solid rgba(255, 255, 255, 0.1);
+    --border-gold: 1px solid rgba(191, 49, 49, 0.3);
+    --border-light: 1px solid rgba(0, 0, 0, 0.1);
 
     /* Font */
     --font-main: 'Poppins', 'Segoe UI', sans-serif;
@@ -234,7 +234,7 @@ ul {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23FFD700" opacity="0.03"/><circle cx="75" cy="75" r="1" fill="%23FFD700" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23BF3131" opacity="0.03"/><circle cx="75" cy="75" r="1" fill="%23BF3131" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
     pointer-events: none;
 }
 
@@ -251,7 +251,7 @@ ul {
 
 .hero-badge {
     display: inline-block;
-    background: rgba(255, 215, 0, 0.1);
+    background: rgba(191, 49, 49, 0.1);
     border: var(--border-gold);
     padding: 8px 20px;
     border-radius: 50px;
@@ -293,7 +293,7 @@ ul {
 .hero-image img {
     width: 100%;
     max-width: 600px;
-    filter: drop-shadow(0 20px 40px rgba(255, 215, 0, 0.2));
+    filter: drop-shadow(0 20px 40px rgba(191, 49, 49, 0.2));
     animation: float 6s ease-in-out infinite;
 }
 
@@ -405,7 +405,7 @@ ul {
 }
 
 .section-gold {
-    background: linear-gradient(180deg, #C9A100 0%, #B8960F 100%);
+    background: linear-gradient(180deg, #BF3131 0%, #A02828 100%);
     color: var(--text-dark);
 }
 
@@ -417,7 +417,7 @@ ul {
    VEHICLE CAROUSEL (Like BBB Transport)
    ============================================= */
 .vehicle-section {
-    background: linear-gradient(180deg, var(--bg-dark) 0%, #1a1505 50%, #C9A100 50%, #B8960F 100%);
+    background: linear-gradient(180deg, var(--bg-dark) 0%, #E8E0E0 50%, #BF3131 50%, #A02828 100%);
     padding: 80px 0;
 }
 
@@ -477,7 +477,7 @@ ul {
 
 .vehicle-card-type {
     display: inline-block;
-    background: rgba(255, 215, 0, 0.1);
+    background: rgba(191, 49, 49, 0.1);
     color: var(--primary);
     padding: 5px 15px;
     border-radius: 20px;
@@ -543,7 +543,7 @@ ul {
    CTA SECTION (Lihat Armada Lainnya style)
    ============================================= */
 .cta-banner {
-    background: linear-gradient(180deg, #1a1505 0%, #C9A100 0%);
+    background: linear-gradient(180deg, #E8E0E0 0%, #BF3131 0%);
     padding: 20px 0 60px;
 }
 
@@ -667,7 +667,7 @@ ul {
 .footer {
     background: var(--bg-darker);
     padding: 60px 0 30px;
-    border-top: 1px solid rgba(255, 215, 0, 0.1);
+    border-top: 1px solid rgba(191, 49, 49, 0.1);
 }
 
 .footer-grid {
@@ -783,7 +783,7 @@ ul {
 .form-control:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+    box-shadow: 0 0 0 3px rgba(191, 49, 49, 0.1);
 }
 
 .form-control::placeholder {
@@ -881,7 +881,7 @@ select.form-control {
     left: 0;
     bottom: 0;
     overflow-y: auto;
-    border-right: 1px solid rgba(255, 215, 0, 0.1);
+    border-right: 1px solid rgba(191, 49, 49, 0.1);
     z-index: 100;
 }
 
@@ -942,7 +942,7 @@ select.form-control {
 
 .sidebar-nav a:hover,
 .sidebar-nav a.active {
-    background: rgba(255, 215, 0, 0.1);
+    background: rgba(191, 49, 49, 0.1);
     color: var(--primary);
 }
 
@@ -1036,7 +1036,7 @@ select.form-control {
 .stat-icon {
     width: 50px;
     height: 50px;
-    background: rgba(255, 215, 0, 0.1);
+    background: rgba(191, 49, 49, 0.1);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -1093,7 +1093,7 @@ select.form-control {
 }
 
 .table th {
-    background: rgba(255, 215, 0, 0.05);
+    background: rgba(191, 49, 49, 0.05);
     font-weight: 600;
     font-size: 0.85rem;
     text-transform: uppercase;
@@ -1102,7 +1102,7 @@ select.form-control {
 }
 
 .table tr:hover {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.03);
 }
 
 .table td {
@@ -1135,7 +1135,7 @@ select.form-control {
 }
 
 .badge-info {
-    background: rgba(255, 215, 0, 0.1);
+    background: rgba(191, 49, 49, 0.1);
     color: var(--primary);
 }
 
@@ -1185,7 +1185,7 @@ select.form-control {
 .nota-logo {
     font-size: 2rem;
     font-weight: 800;
-    color: #C9A100;
+    color: #BF3131;
     margin-bottom: 10px;
 }
 
@@ -1232,7 +1232,7 @@ select.form-control {
 
 .nota-total .nota-value {
     font-size: 1.3rem;
-    color: #C9A100;
+    color: #BF3131;
 }
 
 .nota-footer {
@@ -1283,7 +1283,7 @@ select.form-control {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1329,7 +1329,7 @@ select.form-control {
 .modal-close {
     width: 40px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.08);
     border: none;
     border-radius: 50%;
     color: var(--text-primary);
@@ -1733,24 +1733,24 @@ select.form-control {
    SWEETALERT2 THEME OVERRIDES
    ============================================= */
 .swal2-popup.marvell-popup {
-    background: #1a1a1a !important;
-    border: 1px solid rgba(255, 215, 0, 0.3) !important;
+    background: #FFFFFF !important;
+    border: 1px solid rgba(191, 49, 49, 0.3) !important;
     border-radius: 20px !important;
     font-family: var(--font-main) !important;
 }
 
 .swal2-title.marvell-title {
-    color: #ffffff !important;
+    color: #1a1a1a !important;
     font-weight: 600 !important;
 }
 
 .swal2-html-container {
-    color: #B0B0B0 !important;
+    color: #666666 !important;
 }
 
 .swal2-confirm.marvell-confirm-btn {
-    background: linear-gradient(135deg, #C9A100 0%, #FFD700 50%, #D4AF37 100%) !important;
-    color: #0a0a0a !important;
+    background: linear-gradient(135deg, #BF3131 0%, #D94848 50%, #A02828 100%) !important;
+    color: #FFFFFF !important;
     border-radius: 50px !important;
     font-weight: 600 !important;
     padding: 12px 30px !important;
@@ -1758,16 +1758,16 @@ select.form-control {
 }
 
 .swal2-confirm.marvell-confirm-btn:hover {
-    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3) !important;
+    box-shadow: 0 4px 20px rgba(191, 49, 49, 0.3) !important;
 }
 
 .swal2-cancel.marvell-cancel-btn {
-    background: #333 !important;
-    color: #ffffff !important;
+    background: #E0E0E0 !important;
+    color: #1a1a1a !important;
     border-radius: 50px !important;
     font-weight: 500 !important;
     padding: 12px 30px !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
 
 .swal2-deny.marvell-deny-btn {
@@ -1807,18 +1807,18 @@ select.form-control {
 }
 
 .swal2-icon.swal2-info {
-    border-color: #FFD700 !important;
-    color: #FFD700 !important;
+    border-color: #BF3131 !important;
+    color: #BF3131 !important;
 }
 
 .swal2-icon.swal2-question {
-    border-color: #FFD700 !important;
-    color: #FFD700 !important;
+    border-color: #BF3131 !important;
+    color: #BF3131 !important;
 }
 
 /* Timer progress bar */
 .swal2-timer-progress-bar {
-    background: linear-gradient(90deg, #C9A100, #FFD700) !important;
+    background: linear-gradient(90deg, #8B1A1A, #BF3131) !important;
 }
 
 /* =============================================
@@ -1862,11 +1862,11 @@ select.form-control {
         text-align: center;
         margin-bottom: 30px;
         padding-bottom: 20px;
-        border-bottom: 3px solid #C9A100;
+        border-bottom: 3px solid #BF3131;
     }
 
     .print-header h1 {
-        color: #C9A100 !important;
+        color: #BF3131 !important;
         font-size: 24pt !important;
         margin-bottom: 5px !important;
     }

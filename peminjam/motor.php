@@ -101,8 +101,8 @@ $countAll = $countMatic + $countSport + $countSupermoto;
         }
 
         .flatpickr-day.selected {
-            background: #FFD700 !important;
-            border-color: #FFD700 !important;
+            background: #BF3131 !important;
+            border-color: #BF3131 !important;
             color: #000 !important;
         }
 
@@ -261,7 +261,7 @@ $countAll = $countMatic + $countSport + $countSupermoto;
                                     <img src="../assets/images/<?= htmlspecialchars($motor['gambar']) ?>"
                                         alt="<?= htmlspecialchars($motor['nama_motor']) ?>">
                                 <?php else: ?>
-                                    <img src="https://via.placeholder.com/200x120/1a1a1a/FFD700?text=<?= urlencode($motor['nama_motor']) ?>"
+                                    <img src="https://via.placeholder.com/200x120/EEEEEE/BF3131?text=<?= urlencode($motor['nama_motor']) ?>"
                                         alt="<?= htmlspecialchars($motor['nama_motor']) ?>">
                                 <?php endif; ?>
                             </div>
@@ -395,7 +395,7 @@ $countAll = $countMatic + $countSport + $countSupermoto;
                 title: 'Motor Tidak Tersedia',
                 html: `<p>Maaf, <strong>${motorName}</strong> sedang tidak tersedia.</p><p>Stok motor habis, silakan pilih motor lain atau coba lagi nanti.</p>`,
                 confirmButtonText: 'OK',
-                confirmButtonColor: '#FFD700',
+                confirmButtonColor: '#BF3131',
                 background: '#1a1a1a',
                 color: '#fff'
             });

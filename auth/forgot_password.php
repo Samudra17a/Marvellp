@@ -209,7 +209,7 @@ function sendResetPasswordEmail($email, $otp, $nama) {
     <body style='font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; margin: 0;'>
         <div style='max-width: 500px; margin: 0 auto; background: #ffffff; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);'>
             <div style='background: linear-gradient(135deg, #1a1a1a 0%, #333 100%); padding: 30px; text-align: center;'>
-                <h1 style='color: #C9A100; margin: 0; font-size: 28px;'>🏍️ Marvell Rental</h1>
+                <h1 style='color: #BF3131; margin: 0; font-size: 28px;'>🏍️ Marvell Rental</h1>
                 <p style='color: #ffffff; margin: 10px 0 0 0; font-size: 14px;'>Reset Password</p>
             </div>
             
@@ -235,7 +235,7 @@ function sendResetPasswordEmail($email, $otp, $nama) {
                 <p style='color: #999; font-size: 12px; margin: 0;'>
                     Jika Anda tidak meminta reset password, abaikan email ini.
                 </p>
-                <p style='color: #C9A100; font-size: 11px; margin: 10px 0 0 0;'>
+                <p style='color: #BF3131; font-size: 11px; margin: 10px 0 0 0;'>
                     © 2024 Marvell Rental. All Rights Reserved.
                 </p>
             </div>
@@ -427,14 +427,26 @@ function sendResetPasswordEmail($email, $otp, $nama) {
 
                         <div class="form-group">
                             <label class="form-label">Password Baru *</label>
-                            <input type="password" name="password" class="form-control" placeholder="Minimal 6 karakter"
-                                required minlength="6">
+                            <div style="position: relative;">
+                                <input type="password" name="password" id="reset_password" class="form-control" placeholder="Minimal 6 karakter"
+                                    required minlength="6" style="padding-right: 45px;">
+                                <button type="button" onclick="togglePassword('reset_password', 'resetToggleIcon1')" 
+                                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 5px;">
+                                    <i class="fas fa-eye" id="resetToggleIcon1"></i>
+                                </button>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">Konfirmasi Password *</label>
-                            <input type="password" name="confirm_password" class="form-control"
-                                placeholder="Ulangi password baru" required>
+                            <div style="position: relative;">
+                                <input type="password" name="confirm_password" id="reset_confirm_password" class="form-control"
+                                    placeholder="Ulangi password baru" required style="padding-right: 45px;">
+                                <button type="button" onclick="togglePassword('reset_confirm_password', 'resetToggleIcon2')" 
+                                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 5px;">
+                                    <i class="fas fa-eye" id="resetToggleIcon2"></i>
+                                </button>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-block">
